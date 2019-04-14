@@ -1,0 +1,181 @@
+/* ------------------------------------- Reset / Initialize --------------- */
+
+html 			{ width: 100%; height: 100%; position: static; overflow-x:hidden; 	}
+* 				{ @include box-sizing(border-box); 									}
+figure > img 	{ vertical-align: middle; 											}
+
+
+/* ------------------- Development background colours --------------------*/
+
+%c1 		{ background-color: rgba(red,0.5); 		}
+%c2 		{ background-color: rgba(yellow,0.5); 	}
+%c3 		{ background-color: rgba(green,0.5);    }
+%c4 		{ background-color: rgba(blue,0.5); 	}
+%c5 		{ background-color: rgba(purple,0.5); 	}
+%c6 		{ background-color: rgba(black,0.5); 	}
+%c7 		{ background-color: rgba(deeppink,0.5); }
+
+
+/* ---------------------------------- Common Colours ---------------------------------- */
+
+$pencilGray: 	#DDD;
+$lGray:			#CCC;
+$mGray:			#666;
+$dGray:			#333;
+
+$green:			#14bf36;
+
+
+/* ---------------------------------- Margins ---------------------------------- */
+
+$m: 			1rem;
+$m2: 			2rem;
+$m3: 			3rem;
+
+/* ---------------------------------- Font resets ---------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+	font-size:1.2em;
+	margin: $m 0;
+	display: block;
+	&:first-child { margin-top: 0; }
+}
+b,strong,.strong { font-weight: bold;						}
+i 				 { font-style: italic; 						}
+small,.small 	 { font-size: .8em; 						}
+p 				 { line-height: 1.3em; margin-bottom: $m; 	}
+li 				 { line-height: 1.3em; 						}
+b.latent 		 { font-weight:normal; 						}
+a {
+	color:inherit; text-decoration: none; outline: none;
+	&.salient {
+		color: blue;
+		text-decoration: underline;
+		&:hover { color: #ff8080; }
+	}
+}
+
+
+/* ---------------------------------- Scaffolding & Framework ---------------------------------- */
+
+ul,ol {
+	text-align: left;
+}
+ul.standard, ol.standard {
+	position: relative;
+	list-style-type:none;
+	padding-left: 1.35em;
+	margin-bottom: $m;
+	& > 				li:before { @extend %fa-prepend; @include fa($fa-var-genderless); 	  }
+	&.filled  { 	& > li:before { @extend %fa-prepend; @include fa($fa-var-circle); 	      } }
+	&.caret   { 	& > li:before { @extend %fa-prepend; @include fa($fa-var-caret-right);    } }
+	&.checked { 	& > li:before { @extend %fa-prepend; @include fa($fa-var-check-square-o); } }
+	&.star    { 	& > li:before { @extend %fa-prepend; @include fa($fa-var-star-o); 	      } }
+}
+ul.scaffold li, ol.scaffold li {
+	@extend %clearfix;
+	display: block;
+	margin-top: $m;
+}
+ul.tick-list, ol.tick-list {
+	list-style-type:none !important;
+	li {
+		padding-left: 2em;
+		position: relative;
+		&:before {
+			content: "\2714";
+			position: absolute;
+			top:0; left:0;
+			margin-right: 0.5em;
+			font-size: 1.6em;
+			color: $green;
+		}
+	}
+}
+ul.noh {
+	h1,h2,h3,h4,h5,h6 {
+		font-size: 1em;
+		margin: 0;
+	}
+}
+
+p,a,span,div,h2,h3,h4,h5,h6 {
+	&.caret {
+		padding-left: 1em;
+		position: relative;
+		&:before { @extend %fa-prepend; @include fa($fa-var-caret-right);	}
+	}
+	&.star {
+		padding-left: 1em;
+		position: relative;
+		&:before { @extend %fa-prepend; @include fa($fa-var-star-o);	}
+	}
+}
+figure {
+	position: relative;
+	& > img {
+		border:1px solid #333;
+		width: 100%; height: auto;
+	}
+	figcaption {
+		position: absolute; bottom:$m; left:$m;
+		padding: $m $m*1.5;
+		background-color: $dGray;
+		color: white;
+		font-family: 'Arial', sans-serif;
+		font-size: .7em;
+	}
+}
+figure.noborder {
+	& > img { @extend .noborder; }
+}
+%fa-prepend {
+	position: absolute;
+	left: 0;
+}
+hr {
+	border:none;
+	margin: 1em 0;
+	@extend .span;
+	@extend %rule;
+}
+
+
+/* ---------------------------------- Extends ---------------------------------- */
+
+%text-shadow 		{ @include single-text-shadow(0,0,4px,1px,black); 									}
+%text-shadow-sharp 	{ @include text-shadow(0 0 40px 1px black, 0 0 2px 2 black, 0 0 1px 1px black); 	}
+%text-glow 			{ @include single-text-shadow(0,0,4px,1px,white); 									}
+%text-glow-strong 	{ @include text-shadow(0 0 8px 1px white, 0 0 6px 1px white, 0 0 2px 1px white); 	}
+%glow 				{ @include box-shadow(0 0 4px 1px white) 											}
+%strong-glow 		{ @include box-shadow(0 0 8px 1px white, 0 0 6px 1px white, 0 0 2px 1px white); 	}
+
+%rule { border-bottom: 1px solid $pencilGray; 	}
+
+
+/* ----------------------------------  Helper classes ---------------------------------- */
+
+.browsehappy 	{ font-size: 50px; font-weight: bold; color:red; a { text-decoration:underline; color:blue; } }
+.pending 		{ color:#ff8080; }
+
+.mt { margin-top: $m2; } .mtt { margin-top: $m3; } .mb { margin-bottom: $m2;} .mbb { margin-bottom: $m3; } .mst { margin-top: $m; } .msb { margin-bottom: $m; }
+.noborder { border:none !important }
+.right { float: right;       } .left  { float: left; 	  }
+.tac   { text-align: center !important; } .tal   { text-align: left !important; } 	.tar  { text-align: right !important; 	}
+.big { font-size: 2em;     }
+.large { font-size: 1.25em; }
+
+.span 	 { @include float-span(12); }
+.span-2  { @include float-span(12); @include respond-to(tablet){ @include float-span(2); }	 }
+.span-3  { @include float-span(12); @include respond-to(tablet){ @include float-span(3); }	 }
+.span-4  { @include float-span(12); @include respond-to(tablet){ @include float-span(4); }	 }
+.span-5  { @include float-span(12); @include respond-to(tablet){ @include float-span(5); }	 }
+.span-6  { @include float-span(12); @include respond-to(tablet){ @include float-span(6); }	 }
+.span-7  { @include float-span(12); @include respond-to(tablet){ @include float-span(7); }	 }
+.span-8  { @include float-span(12); @include respond-to(tablet){ @include float-span(8); }	 }
+.span-9  { @include float-span(12); @include respond-to(tablet){ @include float-span(9); }	 }
+.span-10 { @include float-span(12); @include respond-to(tablet){ @include float-span(10); }  }
+.last {
+	float: right !important;
+	margin-right: 0 !important;
+}
